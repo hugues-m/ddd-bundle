@@ -15,7 +15,7 @@
 
         <!-- Event subscribers -->
         <service id="hmlb_ddd.listener.collects_events_from_entities"
-                 class="HMLB\DDDBundle\EventListener\CollectEventsFromEntities"
+                 class="HMLB\DDDBundle\EventListener\CollectsEventsFromEntities"
                  public="false">
             <argument type="service" id="logger"/>
             <tag name="doctrine.event_subscriber"/>
