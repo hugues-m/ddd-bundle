@@ -1,0 +1,46 @@
+language: php
+
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+  - nightly
+
+matrix:
+  include:
+    - php: 5.6
+      env: SYMFONY_VERSION="2.3.*"
+    - php: 5.6
+      env: SYMFONY_VERSION="2.4.*"
+    - php: 5.6
+      env: SYMFONY_VERSION="2.5.*"
+    - php: 5.6
+      env: SYMFONY_VERSION="2.6.*"
+    - php: 5.6
+      env: SYMFONY_VERSION="2.7.*"
+    - php: 5.6
+      env: SYMFONY_VERSION="2.8.*@dev"
+  allow_failures:
+    - php: 7.0
+
+before_install:
+  - composer self-update
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/http-kernel:$SYMFONY_VERSION symfony/dependency-injection:$SYMFONY_VERSION symfony/yaml:$SYMFONY_VERSION; fi
+
+script:
+  - bin/phpunit
+
+after_script:
+  - bin/coveralls
+
+before_script:
+  - composer install -n
+
+script:
+  - bin/phpspec run -fpretty --verbose
+  - bin/phpunit
+
+notifications:
+  email:
+    - system+travis-ci@hmlb.fr

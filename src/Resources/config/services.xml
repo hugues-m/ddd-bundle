@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="messages.xml"/>
+    </imports>
+
+    <services>
+
+        <!-- Global Aliases -->
+        <service id="container" alias="service_container"/>
+        <service id="dispatcher" alias="event_dispatcher"/>
+
+        <!-- Event subscribers -->
+        <service id="hmlb_ddd.listener.collects_events_from_entities"
+                 class="HMLB\DDDBundle\EventListener\CollectEventsFromEntities"
+                 public="false">
+            <argument type="service" id="logger"/>
+            <tag name="doctrine.event_subscriber"/>
+            <tag name="doctrine_mongodb.odm.event_subscriber"/>
+            <tag name="monolog.logger" channel="event_bus"/>
+        </service>
+
+        <!-- Form -->
+        <service id="hmlb_ddd.form.type.identity" class="HMLB\DDDBundle\Form\Type\IdentityType">
+            <tag name="form.type" alias="ddd_identity"/>
+        </service>
+
+        <!-- Validator -->
+
+        <service id="hmlb_ddd.validator.existing_aggregate_root"
+                 class="HMLB\DDDBundle\Validator\Constraint\ExistingAggregateRootValidator">
+            <argument type="service" id="om"/>
+            <tag name="validator.constraint_validator" alias="hmlb_ddd.existing_aggregate_root"/>
+        </service>
+
+    </services>
+</container>

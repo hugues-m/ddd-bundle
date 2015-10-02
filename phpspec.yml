@@ -1,0 +1,4 @@
+formatter.name: pretty
+suites:
+    hmlb_ddd_bundle:
+        namespace: HMLB\DDDBundle
