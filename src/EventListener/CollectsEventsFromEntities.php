@@ -2,6 +2,7 @@
 
 namespace HMLB\DDDBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
@@ -11,7 +12,7 @@ use SimpleBus\Message\Recorder\ContainsRecordedMessages;
  *
  * @author Hugues Maignol <hugues@hmlb.fr>
  */
-class CollectsEventsFromEntities
+class CollectsEventsFromEntities implements EventSubscriber
 {
     /**
      * @var LoggerInterface
