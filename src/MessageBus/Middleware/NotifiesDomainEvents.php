@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
  *
  * @author Hugues Maignol <hugues@hmlb.fr>
  */
-class NotifiesDocumentEvents implements MessageBusMiddleware
+class NotifiesDomainEvents implements MessageBusMiddleware
 {
     /**
      * @var MessageBus
@@ -49,10 +49,10 @@ class NotifiesDocumentEvents implements MessageBusMiddleware
      */
     public function handle($message, callable $next)
     {
-        $this->logger->debug('NotifiesDocumentEvents calls next before collect events');
+        $this->logger->debug('NotifiesDomainEvents calls next before collect events');
         $next($message);
         $events = $this->collectsEventsFromEntities->recordedMessages();
-        $this->logger->debug('NotifiesDocumentEvents collected '.count($events).' events');
+        $this->logger->debug('NotifiesDomainEvents collected '.count($events).' events');
         foreach ($events as $event) {
             $this->eventBus->handle($event);
         }
