@@ -13,12 +13,33 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritdoc}
+     * Generates the configuration tree.
+     *
+     * @return TreeBuilder
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('hmlb_ddd');
+        $rootNode = $treeBuilder->root('hmlb_ddd');
+
+        $supportedDrivers = [
+            'orm',
+            'mongodb',
+        ];
+
+        $rootNode
+            ->children()
+            ->scalarNode('db_driver')
+            ->defaultValue('orm')
+            ->validate()
+            ->ifNotInArray($supportedDrivers)
+            ->thenInvalid('The driver %s is not supported. Please choose one of '.json_encode($supportedDrivers))
+            ->end()
+            ->end()
+            ->scalarNode('persistence_manager_name')->defaultNull()->end()
+            ->booleanNode('persist_commands')->defaultTrue()->end()
+            ->booleanNode('persist_events')->defaultTrue()->end()
+            ->end();
 
         return $treeBuilder;
     }

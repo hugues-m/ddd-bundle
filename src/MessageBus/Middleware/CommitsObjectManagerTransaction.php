@@ -3,7 +3,6 @@
 namespace HMLB\DDDBundle\MessageBus\Middleware;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use HMLB\DDD\Message\Command\Command;
 use HMLB\DDD\Message\Message;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
@@ -39,12 +38,10 @@ class CommitsObjectManagerTransaction implements MessageBusMiddleware
     {
         $this->logger->debug('CommitsObjectManagerTransaction handles '.$message::messageName());
         $next($message);
-        $this->logger->debug('CommitsObjectManagerTransaction is handling '.$message::messageName());
 
-        if ($message instanceof Command) {
-            $this->logger->debug('CommitsObjectManagerTransaction flushes Object manager');
-            $this->om->flush();
-        }
+        $this->logger->debug('CommitsObjectManagerTransaction flushes Object manager');
+        $this->om->flush();
+
         $this->logger->debug('CommitsObjectManagerTransaction finished handling '.$message::messageName());
     }
 }

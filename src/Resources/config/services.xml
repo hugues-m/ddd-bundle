@@ -9,10 +9,6 @@
 
     <services>
 
-        <!-- Global Aliases -->
-        <service id="container" alias="service_container"/>
-        <service id="dispatcher" alias="event_dispatcher"/>
-
         <!-- Event subscribers -->
         <service id="hmlb_ddd.listener.collects_events_from_entities"
                  class="HMLB\DDDBundle\EventListener\CollectsEventsFromEntities"
