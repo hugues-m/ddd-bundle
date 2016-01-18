@@ -6,8 +6,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use HMLB\DDD\Entity\Identity;
 use HMLB\DDD\Message\Message;
 use Psr\Log\LoggerInterface;
-use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use ReflectionClass;
+use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
 /**
  * Adds messages to object manager persistence.
@@ -61,7 +61,9 @@ class PersistsMessages implements MessageBusMiddleware
         $messageClass = get_class($message);
         if ($this->om->getMetadataFactory()->isTransient($messageClass)) {
             $next($message);
-            $this->logger->warning('No OM Metadata for message %s', $message->messageName());
+            $this->logger->warning(
+                sprintf('No OM Metadata for message %s', $message->messageName())
+            );
 
             return;
         }
@@ -72,7 +74,9 @@ class PersistsMessages implements MessageBusMiddleware
         $id->setValue($message, new Identity());
         $id->setAccessible(false);
 
-        $this->logger->debug('PersistsMessages persists message '.$message->getId());
+        $this->logger->debug(
+            sprintf('PersistsMessages persists message '.$message->getId())
+        );
         $this->om->persist($message);
         $next($message);
     }

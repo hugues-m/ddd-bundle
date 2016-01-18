@@ -23,7 +23,7 @@
             <argument type="service" id="event_bus"/>
             <argument type="service" id="hmlb_ddd.listener.collects_events_from_entities"/>
             <tag name="command_bus_middleware" priority="1000"/>
-            <tag name="event_bus_middleware" priority="1000"/>
+            <!--<tag name="event_bus_middleware" priority="1000"/>-->
             <tag name="monolog.logger" channel="command_bus"/>
         </service>
 
