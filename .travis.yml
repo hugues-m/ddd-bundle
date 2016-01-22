@@ -32,3 +32,6 @@ script:
 notifications:
   email:
     - system+travis-ci@hmlb.fr
+
+env:
+  - COMPOSER_PROCESS_TIMEOUT=1800

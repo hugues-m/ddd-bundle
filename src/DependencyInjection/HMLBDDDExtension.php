@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class HMLBDDDExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container): Configuration
+    public function load(array $configs, ContainerBuilder $container): array
     {
         $processor = new Processor();
         $configuration = new Configuration();
