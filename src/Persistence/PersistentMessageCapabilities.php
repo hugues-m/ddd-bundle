@@ -5,9 +5,9 @@ namespace HMLB\DDDBundle\Persistence;
 use HMLB\DDD\Entity\Identity;
 
 /**
- * Trait PersistentMessageCapability
+ * Trait PersistentMessageCapability.
  *
- * @author Hugues Maignol <hugues.maignol@kitpages.fr>
+ * @author Hugues Maignol <hugues@hmlb.fr>
  */
 trait PersistentMessageCapabilities
 {
