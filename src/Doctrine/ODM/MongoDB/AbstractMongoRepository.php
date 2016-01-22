@@ -52,7 +52,7 @@ abstract class AbstractMongoRepository implements Repository
     /**
      * @param AggregateRoot $document
      *
-     * @return AbstractMongoRepository
+     * @return self
      */
     public function add(AggregateRoot $document)
     {
