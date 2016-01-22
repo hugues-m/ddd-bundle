@@ -11,6 +11,7 @@ matrix:
       env: SYMFONY_VERSION="3.0"
   allow_failures:
     - php: nightly
+    - php: hhvm
 
 before_install:
   - composer self-update
