@@ -36,10 +36,12 @@ class CommitsObjectManagerTransaction implements MessageBusMiddleware
      */
     public function handle($message, callable $next)
     {
-        $this->logger->debug('CommitsObjectManagerTransaction handles '.$message::messageName());
         $next($message);
 
-        $this->logger->debug('CommitsObjectManagerTransaction flushes Object manager');
+        $this->logger->debug(
+            'CommitsObjectManagerTransaction flushes Object manager after handling command'.$message::messageName()
+        );
+
         $this->om->flush();
 
         $this->logger->debug('CommitsObjectManagerTransaction finished handling '.$message::messageName());
