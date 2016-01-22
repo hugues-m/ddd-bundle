@@ -38,7 +38,7 @@ class CollectsEventsFromEntities implements EventSubscriber
     /**
      * @return array
      */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             'prePersist',
@@ -112,7 +112,7 @@ class CollectsEventsFromEntities implements EventSubscriber
     /**
      * @return MessageInterface[]
      */
-    public function recordedMessages()
+    public function recordedMessages(): array
     {
         return $this->collectedEvents;
     }

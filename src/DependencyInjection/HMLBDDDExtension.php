@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class HMLBDDDExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): Configuration
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -87,7 +87,7 @@ class HMLBDDDExtension extends Extension
         }
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'hmlb_ddd';
     }

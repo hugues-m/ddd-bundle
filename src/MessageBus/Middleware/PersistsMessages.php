@@ -3,6 +3,9 @@
 namespace HMLB\DDDBundle\MessageBus\Middleware;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use HMLB\DDD\Exception\Exception;
+use HMLB\DDD\Message\Command\Command;
+use HMLB\DDD\Message\Event\Event;
 use HMLB\DDD\Message\Message;
 use HMLB\DDDBundle\Persistence\PersistentMessage;
 use Psr\Log\LoggerInterface;
@@ -43,7 +46,7 @@ class PersistsMessages implements MessageBusMiddleware
      * @param bool            $persistCommands
      * @param bool            $persistEvents
      */
-    public function __construct(LoggerInterface $logger, ObjectManager $om, $persistCommands, $persistEvents)
+    public function __construct(LoggerInterface $logger, ObjectManager $om, bool $persistCommands, bool $persistEvents)
     {
         $this->logger = $logger;
         $this->om = $om;
@@ -57,8 +60,10 @@ class PersistsMessages implements MessageBusMiddleware
      */
     public function handle($message, callable $next)
     {
-        if ($message instanceof PersistentMessage) {
-            if (!$message->getId()) {
+        if ($message instanceof PersistentMessage && $this->shouldPersistMessage($message)) {
+            try {
+                $message->getId();
+            } catch (Exception $e) {
                 $message->initializeId();
             }
 
@@ -66,5 +71,16 @@ class PersistsMessages implements MessageBusMiddleware
         }
 
         $next($message);
+    }
+
+    /**
+     * @param PersistentMessage $message
+     *
+     * @return bool
+     */
+    private function shouldPersistMessage(PersistentMessage $message): bool
+    {
+        return ($message instanceof Command && $this->persistCommands) ||
+        ($message instanceof Event && $this->persistEvents);
     }
 }

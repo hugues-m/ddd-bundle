@@ -19,16 +19,16 @@
   "homepage": "https://github.com/hmlb/ddd-bundle",
   "license": "MIT",
   "require": {
-    "php": ">=5.5.0",
+    "php": "~7.0",
     "hmlb/ddd": "~1.0@dev",
     "simple-bus/message-bus": "~2.1",
     "simple-bus/symfony-bridge": "~4.0",
-    "symfony/http-kernel": "~2.3|~3.0",
-    "symfony/dependency-injection": "~2.3|~3.0",
-    "symfony/yaml": "~2.3|~3.0",
-    "symfony/validator": "~2.3|~3.0",
-    "symfony/form": "~2.3|~3.0",
-    "symfony/options-resolver": "~2.3|~3.0"
+    "symfony/http-kernel": "~3.0",
+    "symfony/dependency-injection": "~3.0",
+    "symfony/yaml": "~3.0",
+    "symfony/validator": "~3.0",
+    "symfony/form": "~3.0",
+    "symfony/options-resolver": "~3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
@@ -38,7 +38,7 @@
     "simple-bus/doctrine-orm-bridge": "~4.0",
     "doctrine/orm": "~2.5",
     "doctrine/doctrine-bundle": "~1.0",
-    "symfony/monolog-bundle": "~2.3|~3.0",
+    "symfony/monolog-bundle": "~2.8|3.0",
     "matthiasnoback/symfony-config-test": "~1.3",
     "matthiasnoback/symfony-dependency-injection-test": "~0.7"
 

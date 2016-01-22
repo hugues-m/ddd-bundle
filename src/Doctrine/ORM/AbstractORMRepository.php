@@ -34,7 +34,7 @@ abstract class AbstractORMRepository implements Repository
     /**
      * @return AggregateRoot[]
      */
-    public function getAll()
+    public function getAll(): array
     {
         return $this->entityRepository->findAll();
     }
@@ -44,7 +44,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return AggregateRoot
      */
-    public function get(Identity $identity)
+    public function get(Identity $identity): AggregateRoot
     {
         return $this->entityRepository->find($identity);
     }
@@ -54,7 +54,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return self
      */
-    public function add(AggregateRoot $document)
+    public function add(AggregateRoot $document): self
     {
         $this->em->persist($document);
 
@@ -71,7 +71,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return AggregateRoot[]
      */
-    protected function getBy(array $criteria, array $sort = null, $limit = null, $skip = null)
+    protected function getBy(array $criteria, array $sort = null, int $limit = null, int $skip = null): array
     {
         return $this->entityRepository->findBy($criteria, $sort, $limit, $skip);
     }
@@ -83,7 +83,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return AggregateRoot
      */
-    protected function getOneBy(array $criteria)
+    protected function getOneBy(array $criteria): AggregateRoot
     {
         return $this->entityRepository->findOneBy($criteria);
     }
@@ -140,7 +140,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return string
      */
-    protected function getPropertyName($name, array $rootProperties = [])
+    protected function getPropertyName(string $name, array $rootProperties = []): string
     {
         if (!in_array($name, $rootProperties) && false === mb_strpos($name, '.')) {
             return $this->getAlias().'.'.$name;
@@ -158,7 +158,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return string
      */
-    protected function sanitizeParameterName($property)
+    protected function sanitizeParameterName(string $property): string
     {
         return str_replace('.', '_', $property);
     }
@@ -166,7 +166,7 @@ abstract class AbstractORMRepository implements Repository
     /**
      * @return string The main alias used for this repository's entity in queries.
      */
-    protected function getAlias()
+    protected function getAlias(): string
     {
         $className = $this->getClassName();
         $classPieces = explode('\\', $className);

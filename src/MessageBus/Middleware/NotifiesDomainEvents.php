@@ -3,9 +3,9 @@
 namespace HMLB\DDDBundle\MessageBus\Middleware;
 
 use HMLB\DDDBundle\EventListener\CollectsEventsFromEntities;
+use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
-use Psr\Log\LoggerInterface;
 
 /**
  * NotifiesDomainEvents.

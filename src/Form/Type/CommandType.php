@@ -3,11 +3,11 @@
 namespace HMLB\DDDBundle\Form\Type;
 
 use HMLB\DDD\Message\Command\Command;
+use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use ReflectionClass;
 
 /**
  * CommandType.

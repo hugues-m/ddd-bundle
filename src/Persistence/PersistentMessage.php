@@ -16,12 +16,12 @@ interface PersistentMessage
      *
      * @return Identity
      */
-    public function getId();
+    public function getId(): Identity;
 
     /**
      * Create an identity for the message.
      *
      * @return self
      */
-    public function initializeId();
+    public function initializeId(): self;
 }
