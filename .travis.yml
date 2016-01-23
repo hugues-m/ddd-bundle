@@ -6,9 +6,6 @@ php:
   - nightly
 
 matrix:
-  include:
-    - php: 7.0
-      env: SYMFONY_VERSION="3.0"
   allow_failures:
     - php: nightly
     - php: hhvm
