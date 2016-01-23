@@ -6,5 +6,12 @@
 
     <services>
         <service id="om" alias="doctrine.orm.default_entity_manager"/>
+
+        <service id="hmlb_ddd.repository.doctrine"
+                 class="HMLB\DDDBundle\Doctrine\ORM\AbstractORMRepository"
+                 abstract="true">
+            <argument type="service" id="om"/>
+        </service>
     </services>
+
 </container>
