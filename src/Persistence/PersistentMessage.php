@@ -20,8 +20,6 @@ interface PersistentMessage
 
     /**
      * Create an identity for the message.
-     *
-     * @return self
      */
-    public function initializeId(): self;
+    public function initializeId(): void;
 }

@@ -32,13 +32,9 @@ trait PersistentMessageCapabilities
 
     /**
      * Create an identity for the message.
-     *
-     * @return self
      */
-    public function initializeId(): self
+    public function initializeId(): void
     {
         $this->id = new Identity();
-
-        return $this;
     }
 }
