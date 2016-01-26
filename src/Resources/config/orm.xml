@@ -12,6 +12,11 @@
                  abstract="true">
             <argument type="service" id="om"/>
         </service>
+
+        <service id="hmlb_ddd.doctrine.orm.messages_mapping_subscriber"
+                 class="HMLB\DDDBundle\Doctrine\ORM\MessagesMappingSubscriber">
+            <tag name="doctrine.event_subscriber"/>
+        </service>
     </services>
 
 </container>

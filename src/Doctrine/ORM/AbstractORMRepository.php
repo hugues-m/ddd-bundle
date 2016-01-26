@@ -51,8 +51,6 @@ abstract class AbstractORMRepository implements Repository
 
     /**
      * @param AggregateRoot $document
-     *
-     * @return void
      */
     public function add(AggregateRoot $document)
     {

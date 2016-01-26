@@ -7,6 +7,7 @@ namespace HMLB\DDDBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -15,8 +16,41 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @author Hugues Maignol <hugues@hmlb.fr>
  */
-class HMLBDDDExtension extends Extension
+class HMLBDDDExtension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * We add mapping information for our Messages Classes.
+     *
+     * todo: It should be dynamic for non default entity_manager name
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+
+        if (isset($bundles['DoctrineBundle'])) {
+            $mappingConfig = [
+                'orm' => [
+                    'entity_managers' => [
+                        'default' => [
+                            'mappings' => [
+                                'HMLBDDDBundle' => [
+                                    'mapping' => true,
+                                    'type' => 'xml',
+                                    'dir' => '%kernel.root_dir%/../../src/Resources/config/doctrine',
+                                    'prefix' => 'HMLB\DDD',
+                                    'is_bundle' => false,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ];
+
+            $container->getExtension('doctrine');
+            $container->prependExtensionConfig('doctrine', $mappingConfig);
+        }
+    }
+
     public function load(array $configs, ContainerBuilder $container): array
     {
         $processor = new Processor();

@@ -30,12 +30,6 @@ doctrine:
             default:
                 connection: default
                 mappings:
-                    HMLBDDDBundle:
-                        mapping:              true
-                        type:                 xml
-                        dir:                  %kernel.root_dir%/../../src/Resources/config/doctrine
-                        prefix:               HMLB\DDD
-                        is_bundle:            false
                     HMLBDDDBundleTestMessage:
                         mapping:              true
                         type:                 xml
