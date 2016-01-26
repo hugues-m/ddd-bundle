@@ -22,7 +22,7 @@ class MessagesMappingSubscriber implements EventSubscriber
         ];
     }
 
-    public function onClassMetadataNotDound(OnClassMetadataNotFoundEventArgs $event)
+    public function onClassMetadataNotFound(OnClassMetadataNotFoundEventArgs $event)
     {
     }
 
