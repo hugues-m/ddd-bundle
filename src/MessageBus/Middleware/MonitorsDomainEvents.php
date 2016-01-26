@@ -52,12 +52,23 @@ class MonitorsDomainEvents implements MessageBusMiddleware
         $this->logger->debug('MonitorsDomainEvents saw '.$count.' events');
 
         if ($count) {
-            throw new Exception(
-                sprintf(
-                    '%s Domain Events have been collected but will not be notified.
-                    You should not raise domain event during the handling of a Event message but only for a Command.'
-                )
-            );
+            foreach ($events as $event) {
+                $this->logger->debug('MonitorsDomainEvents saw '.get_class($event));
+            }
+            if ($count == 1) {
+                $message = sprintf(
+                    '%s Domain Event has been collected but will not be notified.
+                    You should not raise domain event during the handling of a Event message but only for a Command.',
+                    get_class(array_pop($events))
+                );
+            } else {
+                $message = sprintf(
+                    '%s Domain Event(s) have been collected but will not be notified.
+                    You should not raise domain event during the handling of a Event message but only for a Command.',
+                    $count
+                );
+            }
+            throw new Exception($message);
         }
     }
 }

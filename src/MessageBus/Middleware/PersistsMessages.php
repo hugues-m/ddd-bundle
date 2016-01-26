@@ -3,11 +3,11 @@
 namespace HMLB\DDDBundle\MessageBus\Middleware;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use HMLB\DDD\Exception\Exception;
+use HMLB\DDD\Exception\PersistentMessageWithoutIdentityException;
 use HMLB\DDD\Message\Command\Command;
 use HMLB\DDD\Message\Event\Event;
 use HMLB\DDD\Message\Message;
-use HMLB\DDDBundle\Persistence\PersistentMessage;
+use HMLB\DDD\Persistence\PersistentMessage;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
@@ -63,7 +63,7 @@ class PersistsMessages implements MessageBusMiddleware
         if ($message instanceof PersistentMessage && $this->shouldPersistMessage($message)) {
             try {
                 $message->getId();
-            } catch (Exception $e) {
+            } catch (PersistentMessageWithoutIdentityException $e) {
                 $message->initializeId();
             }
 

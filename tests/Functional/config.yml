@@ -4,9 +4,21 @@ parameters:
 hmlb_ddd:
     db_driver: orm
 
+framework:
+    assets: ~
+    translator:      { fallback: en }
+    secret:          suchsecretverywowmuchsecure
+    router:
+        resource: "%kernel.root_dir%/routing.yml"
+
 services:
     annotation_reader:
         class: Doctrine\Common\Annotations\AnnotationReader
+    handler_task:
+        class: HMLB\DDDBundle\Tests\Message\DoSomethingImportantHandler
+        arguments:    ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: command_handler, handles: do_something_important }
 
 doctrine:
     dbal:
@@ -18,10 +30,21 @@ doctrine:
             default:
                 connection: default
                 mappings:
-                    HMLBDDDBundle: ~
+                    HMLBDDDBundle:
+                        mapping:              true
+                        type:                 xml
+                        dir:                  %kernel.root_dir%/../../src/Resources/config/doctrine
+                        prefix:               HMLB\DDD
+                        is_bundle:            false
+                    HMLBDDDBundleTestMessage:
+                        mapping:              true
+                        type:                 xml
+                        dir:                  %kernel.root_dir%/doctrine
+                        prefix:               HMLB\DDDBundle\Tests
+                        is_bundle:            false
 
 command_bus:
-    command_name_resolver_strategy: class_based
+    command_name_resolver_strategy: named_message
     logging: ~
 
 event_bus:

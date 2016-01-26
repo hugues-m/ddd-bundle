@@ -52,10 +52,11 @@ class NotifiesDomainEvents implements MessageBusMiddleware
         $this->logger->debug('NotifiesDomainEvents calls next before collect events');
         $next($message);
         $events = $this->collectsEventsFromEntities->recordedMessages();
-        $this->logger->debug('NotifiesDomainEvents collected '.count($events).' events');
+        $this->collectsEventsFromEntities->eraseMessages();
+
+        $this->logger->debug('NotifiesDomainEvents notifies '.count($events).' events');
         foreach ($events as $event) {
             $this->eventBus->handle($event);
         }
-        $this->collectsEventsFromEntities->eraseMessages();
     }
 }

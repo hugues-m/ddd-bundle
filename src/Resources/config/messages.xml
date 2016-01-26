@@ -22,7 +22,7 @@
             <argument type="service" id="logger"/>
             <argument type="service" id="event_bus"/>
             <argument type="service" id="hmlb_ddd.listener.collects_events_from_entities"/>
-            <tag name="command_bus_middleware" priority="1000"/>
+            <tag name="command_bus_middleware" priority="600"/>
             <tag name="monolog.logger" channel="command_bus"/>
         </service>
 
@@ -31,8 +31,8 @@
                  public="false">
             <argument type="service" id="logger"/>
             <argument type="service" id="hmlb_ddd.listener.collects_events_from_entities"/>
-            <tag name="command_bus_middleware" priority="1010"/>
-            <tag name="event_bus_middleware" priority="1010"/>
+            <tag name="command_bus_middleware" priority="700"/>
+            <tag name="event_bus_middleware" priority="700"/>
             <tag name="monolog.logger" channel="command_bus"/>
         </service>
 
@@ -43,8 +43,8 @@
             <argument type="service" id="om"/>
             <argument>%hmlb_ddd.persist_commands%</argument>
             <argument>%hmlb_ddd.persist_events%</argument>
-            <tag name="command_bus_middleware" priority="0"/>
-            <tag name="event_bus_middleware" priority="0"/>
+            <tag name="command_bus_middleware" priority="100"/>
+            <tag name="event_bus_middleware" priority="100"/>
             <tag name="monolog.logger" channel="command_bus"/>
         </service>
         <!-- CommandBus MiddleWares -->

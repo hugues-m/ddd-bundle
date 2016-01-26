@@ -6,6 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use HMLB\DDDBundle\HMLBDDDBundle;
 use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use SimpleBus\SymfonyBridge\SimpleBusEventBusBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -39,6 +40,7 @@ class TestKernel extends Kernel
     {
         return [
             new DoctrineBundle(),
+            new FrameworkBundle(),
             new SimpleBusCommandBusBundle(),
             new SimpleBusEventBusBundle(),
             new MonologBundle(),

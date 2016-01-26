@@ -114,6 +114,8 @@ class CollectsEventsFromEntities implements EventSubscriber
      */
     public function recordedMessages(): array
     {
+        $this->log->debug('CollectsEventsFromEntities giving it\'s '.count($this->collectedEvents).' events');
+
         return $this->collectedEvents;
     }
 
@@ -122,6 +124,7 @@ class CollectsEventsFromEntities implements EventSubscriber
      */
     public function eraseMessages()
     {
+        $this->log->debug('CollectsEventsFromEntities erasing events');
         $this->collectedEvents = [];
     }
 }
