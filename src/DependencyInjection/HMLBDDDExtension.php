@@ -36,7 +36,7 @@ class HMLBDDDExtension extends Extension implements PrependExtensionInterface
                                 'HMLBDDDBundle' => [
                                     'mapping' => true,
                                     'type' => 'xml',
-                                    'dir' => '%kernel.root_dir%/../../src/Resources/config/doctrine',
+                                    'dir' => __DIR__.'/../Resources/config/doctrine',
                                     'prefix' => 'HMLB\DDD',
                                     'is_bundle' => false,
                                 ],
