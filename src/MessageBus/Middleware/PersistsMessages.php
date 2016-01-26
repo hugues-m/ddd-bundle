@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace HMLB\DDDBundle\MessageBus\Middleware;
 
@@ -61,6 +62,7 @@ class PersistsMessages implements MessageBusMiddleware
     public function handle($message, callable $next)
     {
         if ($message instanceof PersistentMessage && $this->shouldPersistMessage($message)) {
+            $this->logger->debug('PersistsMessage persisting '.get_class($message));
             try {
                 $message->getId();
             } catch (PersistentMessageWithoutIdentityException $e) {

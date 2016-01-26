@@ -52,13 +52,11 @@ abstract class AbstractMongoRepository implements Repository
     /**
      * @param AggregateRoot $document
      *
-     * @return self
+     * @return void
      */
     public function add(AggregateRoot $document)
     {
         $this->dm->persist($document);
-
-        return $this;
     }
 
     /**

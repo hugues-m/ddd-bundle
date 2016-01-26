@@ -52,13 +52,11 @@ abstract class AbstractORMRepository implements Repository
     /**
      * @param AggregateRoot $document
      *
-     * @return self
+     * @return void
      */
-    public function add(AggregateRoot $document): self
+    public function add(AggregateRoot $document)
     {
         $this->em->persist($document);
-
-        return $this;
     }
 
     /**
