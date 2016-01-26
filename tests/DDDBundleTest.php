@@ -46,12 +46,20 @@ class DDDBundleTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                'hmlb_ddd.persist_commands',
+                'hmlb_ddd.persistence.persist_commands',
                 true,
             ],
             [
-                'hmlb_ddd.persist_events',
+                'hmlb_ddd.persistence.persist_events',
                 true,
+            ],
+            [
+                'hmlb_ddd.persistence.event_repository_service',
+                'hmlb_ddd.repository.event.default',
+            ],
+            [
+                'hmlb_ddd.persistence.command_repository_service',
+                'hmlb_ddd.repository.command.default',
             ],
             [
                 'hmlb_ddd.db_driver',

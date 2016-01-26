@@ -8,7 +8,7 @@ use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
 
 /**
- * Task
+ * Task.
  *
  * @author Hugues Maignol <hugues@hmlb.fr>
  */
@@ -43,5 +43,4 @@ class Task implements ContainsRecordedMessages
         echo $notice;
         $this->record(new SomethingImportantHappened($this->goal));
     }
-
 }

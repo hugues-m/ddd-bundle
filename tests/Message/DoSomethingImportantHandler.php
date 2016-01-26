@@ -31,7 +31,6 @@ class DoSomethingImportantHandler implements Handler
 
     /**
      * @param Command|DoSomethingImportant $command
-     *
      */
     public function handle(Command $command)
     {

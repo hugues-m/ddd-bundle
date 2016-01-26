@@ -13,6 +13,7 @@ class SomethingImportantHappened extends PersistentEvent
 {
     /**
      * The thing that happened.
+     *
      * @var string
      */
     private $thing;
@@ -28,12 +29,10 @@ class SomethingImportantHappened extends PersistentEvent
     }
 
     /**
-     *
      * @return string
      */
     public function getThing(): string
     {
         return $this->thing;
     }
-
 }

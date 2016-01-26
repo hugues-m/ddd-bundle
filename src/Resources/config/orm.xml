@@ -6,6 +6,8 @@
 
     <services>
         <service id="om" alias="doctrine.orm.default_entity_manager"/>
+        <service id="hmlb_ddd.repository.command.default" alias="hmlb_ddd.repository.doctrine.orm.persistent_command"/>
+        <service id="hmlb_ddd.repository.event.default" alias="hmlb_ddd.repository.doctrine.orm.persistent_event"/>
 
         <service id="hmlb_ddd.repository.doctrine"
                  class="HMLB\DDDBundle\Doctrine\ORM\AbstractORMRepository"
@@ -16,6 +18,22 @@
         <service id="hmlb_ddd.doctrine.orm.messages_mapping_subscriber"
                  class="HMLB\DDDBundle\Doctrine\ORM\MessagesMappingSubscriber">
             <tag name="doctrine.event_subscriber"/>
+        </service>
+
+        <service id="hmlb_ddd.repository.doctrine.orm.persistent_message"
+                 abstract="true"
+                 class="HMLB\DDDBundle\Doctrine\ORM\AbstractOrmPersistentMessageRepository">
+            <argument type="service" id="om"/>
+        </service>
+
+        <service id="hmlb_ddd.repository.doctrine.orm.persistent_command"
+                 parent="hmlb_ddd.repository.doctrine.orm.persistent_message"
+                 class="HMLB\DDDBundle\Doctrine\ORM\ORMPersistentCommandRepository">
+        </service>
+
+        <service id="hmlb_ddd.repository.doctrine.orm.persistent_event"
+                 parent="hmlb_ddd.repository.doctrine.orm.persistent_message"
+                 class="HMLB\DDDBundle\Doctrine\ORM\ORMPersistentEventRepository">
         </service>
     </services>
 

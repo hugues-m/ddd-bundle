@@ -10,7 +10,7 @@ use Doctrine\ORM\Events;
 /**
  * MessagesMappingSubscriber.
  *
- * @author Hugues Maignol <hugues.maignol@kitpages.fr>
+ * @author Hugues Maignol <hugues@hmlb.fr>
  */
 class MessagesMappingSubscriber implements EventSubscriber
 {

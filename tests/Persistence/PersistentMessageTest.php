@@ -1,9 +1,13 @@
 <?php
+
 namespace HMLB\DDDBundle\Tests;
 
 use HMLB\DDD\Entity\Identity;
+use HMLB\DDDBundle\Repository\PersistentCommandRepository;
+use HMLB\DDDBundle\Repository\PersistentEventRepository;
 use HMLB\DDDBundle\Tests\Functional\TestKernel;
 use HMLB\DDDBundle\Tests\Message\DoSomethingImportant;
+use HMLB\DDDBundle\Tests\Message\SomethingImportantHappened;
 use PHPUnit_Framework_TestCase;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -11,7 +15,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * PersistentMessageTest
+ * PersistentMessageTest.
  *
  * @author Hugues Maignol <hugues@hmlb.fr>
  */
@@ -60,26 +64,45 @@ class PersistentMessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      */
     public function commandsCanBePersisted()
     {
-
         $command = new DoSomethingImportant('Brush teeth');
 
         $this->getCommandBus()->handle($command);
 
         $this->assertInstanceOf(Identity::class, $command->getId());
+
+        /* @var PersistentCommandRepository $repository */
+        $commandRepository = $this->container->get('hmlb_ddd.repository.command');
+
+        $foundCommand = $commandRepository->get($command->getId());
+        $this->assertSame($command, $foundCommand);
+
+        $foundCommands = $commandRepository->getByMessage(DoSomethingImportant::class);
+        $this->assertCount(1, $foundCommands);
+        $this->assertSame($command, $foundCommands[0]);
+
+        /** @var PersistentEventRepository $eventRepository */
+        $eventRepository = $this->container->get('hmlb_ddd.repository.event');
+
+        $foundEvents = $eventRepository->getByMessage(SomethingImportantHappened::class);
+        $this->assertCount(1, $foundEvents);
+
+        /** @var SomethingImportantHappened $event */
+        $event = $foundEvents[0];
+        $this->assertInstanceOf(SomethingImportantHappened::class, $event);
+        $this->assertEquals($command->getTask(), $event->getThing());
+
+        $foundEvent = $eventRepository->get($event->getId());
+        $this->assertSame($event, $foundEvent);
     }
 
     /**
-     *
      * @return MessageBus
-     *
      */
     private function getCommandBus(): MessageBus
     {
         return $this->container->get('command_bus');
     }
-
 }

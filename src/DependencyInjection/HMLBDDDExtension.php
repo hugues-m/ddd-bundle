@@ -55,7 +55,6 @@ class HMLBDDDExtension extends Extension implements PrependExtensionInterface
     {
         $processor = new Processor();
         $configuration = new Configuration();
-
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -70,14 +69,8 @@ class HMLBDDDExtension extends Extension implements PrependExtensionInterface
             $loader->load(sprintf('%s.xml', $basename));
         }
 
-        $this->remapParameters(
-            $config,
-            $container,
-            [
-                'persist_commands' => 'hmlb_ddd.persist_commands',
-                'persist_events' => 'hmlb_ddd.persist_events',
-            ]
-        );
+        $container->setAlias('hmlb_ddd.repository.command', $config['persistence']['command_repository_service']);
+        $container->setAlias('hmlb_ddd.repository.event', $config['persistence']['event_repository_service']);
 
         $this->remapParametersNamespaces(
             $config,
@@ -85,7 +78,12 @@ class HMLBDDDExtension extends Extension implements PrependExtensionInterface
             [
                 '' => [
                     'db_driver' => 'hmlb_ddd.db_driver',
-                    'persistence_manager_name' => 'hmlb_ddd.persistence_manager_name',
+                ],
+                'persistence' => [
+                    'persist_commands' => 'hmlb_ddd.persistence.persist_commands',
+                    'persist_events' => 'hmlb_ddd.persistence.persist_events',
+                    'command_repository_service' => 'hmlb_ddd.persistence.command_repository_service',
+                    'event_repository_service' => 'hmlb_ddd.persistence.event_repository_service',
                 ],
             ]
         );

@@ -11,9 +11,9 @@ use HMLB\DDD\Message\Command\PersistentCommand;
  */
 class DoSomethingImportant extends PersistentCommand
 {
-
     /**
      * The thing that is important.
+     *
      * @var string
      */
     private $task;
@@ -29,7 +29,6 @@ class DoSomethingImportant extends PersistentCommand
     }
 
     /**
-     *
      * @return string
      */
     public function getTask(): string
