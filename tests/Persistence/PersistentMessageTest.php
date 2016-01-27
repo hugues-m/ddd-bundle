@@ -1,6 +1,6 @@
 <?php
 
-namespace HMLB\DDDBundle\Tests;
+namespace HMLB\DDDBundle\Tests\Persistence;
 
 use HMLB\DDD\Entity\Identity;
 use HMLB\DDDBundle\Repository\PersistentCommandRepository;
