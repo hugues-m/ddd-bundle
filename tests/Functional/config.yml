@@ -37,14 +37,6 @@ doctrine:
                         prefix:               HMLB\DDDBundle\Tests
                         is_bundle:            false
 
-command_bus:
-    command_name_resolver_strategy: named_message
-    logging: ~
-
-event_bus:
-    event_name_resolver_strategy: named_message
-    logging: ~
-
 monolog:
     handlers:
         main:

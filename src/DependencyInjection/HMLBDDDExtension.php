@@ -49,6 +49,19 @@ class HMLBDDDExtension extends Extension implements PrependExtensionInterface
             $container->getExtension('doctrine');
             $container->prependExtensionConfig('doctrine', $mappingConfig);
         }
+
+        $container->prependExtensionConfig(
+            'command_bus',
+            [
+                'command_name_resolver_strategy' => 'named_message',
+            ]
+        );
+        $container->prependExtensionConfig(
+            'event_bus',
+            [
+                'event_name_resolver_strategy' => 'named_message',
+            ]
+        );
     }
 
     public function load(array $configs, ContainerBuilder $container): array
