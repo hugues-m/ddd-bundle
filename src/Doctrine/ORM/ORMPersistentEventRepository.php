@@ -18,7 +18,7 @@ class ORMPersistentEventRepository extends AbstractOrmPersistentMessageRepositor
      *
      * @return PersistentEvent
      */
-    public function get(Identity $identity): PersistentEvent
+    public function get(Identity $identity)
     {
         return $this->em->getRepository(PersistentEvent::class)->find($identity);
     }

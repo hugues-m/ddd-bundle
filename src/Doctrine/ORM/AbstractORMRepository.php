@@ -44,7 +44,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return AggregateRoot
      */
-    public function get(Identity $identity): AggregateRoot
+    public function get(Identity $identity)
     {
         return $this->entityRepository->find($identity);
     }
@@ -67,7 +67,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return AggregateRoot[]
      */
-    protected function getBy(array $criteria, array $sort = null, int $limit = null, int $skip = null): array
+    protected function getBy(array $criteria, array $sort = null, int $limit = null, int $skip = null)
     {
         return $this->entityRepository->findBy($criteria, $sort, $limit, $skip);
     }
@@ -79,7 +79,7 @@ abstract class AbstractORMRepository implements Repository
      *
      * @return AggregateRoot
      */
-    protected function getOneBy(array $criteria): AggregateRoot
+    protected function getOneBy(array $criteria)
     {
         return $this->entityRepository->findOneBy($criteria);
     }

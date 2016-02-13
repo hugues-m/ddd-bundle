@@ -18,7 +18,7 @@ class ORMPersistentCommandRepository extends AbstractOrmPersistentMessageReposit
      *
      * @return PersistentCommand
      */
-    public function get(Identity $identity): PersistentCommand
+    public function get(Identity $identity)
     {
         return $this->em->getRepository(PersistentCommand::class)->find($identity);
     }
