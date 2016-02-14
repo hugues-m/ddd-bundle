@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace HMLB\DDDBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;

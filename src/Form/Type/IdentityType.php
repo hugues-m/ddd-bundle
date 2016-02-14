@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace HMLB\DDDBundle\Form\Type;
 
 use HMLB\DDDBundle\Form\DataTransformer\IdentityTransformer;

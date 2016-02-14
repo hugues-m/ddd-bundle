@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace HMLB\DDDBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
@@ -8,7 +10,7 @@ use HMLB\DDDBundle\Repository\PersistentMessageRepository;
 /**
  * AbstractOrmPersistentMessageRepository.
  *
- * @author Hugues Maignol <hugues.maignol@kitpages.fr>
+ * @author Hugues Maignol <hugues@hmlb.fr>
  */
 abstract class AbstractOrmPersistentMessageRepository implements PersistentMessageRepository
 {

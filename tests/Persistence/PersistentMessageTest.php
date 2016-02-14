@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace HMLB\DDDBundle\Tests\Persistence;
 
 use HMLB\DDD\Entity\Identity;

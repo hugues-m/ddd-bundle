@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace HMLB\DDDBundle\Doctrine\ORM;
 
 use HMLB\DDD\Entity\Identity;

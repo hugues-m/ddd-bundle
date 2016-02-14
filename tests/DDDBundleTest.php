@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace HMLB\DDDBundle\Tests;
 
 use HMLB\DDDBundle\Tests\Functional\TestKernel;

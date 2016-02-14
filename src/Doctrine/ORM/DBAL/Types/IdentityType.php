@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace HMLB\DDDBundle\Doctrine\ORM\DBAL\Types;
 
 use Doctrine\DBAL\Types\ConversionException;

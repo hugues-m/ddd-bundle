@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace HMLB\DDDBundle\MessageBus\Middleware;
 
 use HMLB\DDD\Exception\Exception;
