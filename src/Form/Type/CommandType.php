@@ -75,7 +75,7 @@ abstract class CommandType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return call_user_func($this->getCommandClass().'::messageName');
     }

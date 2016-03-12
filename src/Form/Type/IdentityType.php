@@ -6,6 +6,7 @@ namespace HMLB\DDDBundle\Form\Type;
 
 use HMLB\DDDBundle\Form\DataTransformer\IdentityTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,13 +35,13 @@ class IdentityType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ddd_identity';
     }
 
     public function getParent()
     {
-        return 'hidden';
+        return HiddenType::class;
     }
 }
