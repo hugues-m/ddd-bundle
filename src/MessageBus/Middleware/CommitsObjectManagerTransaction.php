@@ -8,6 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use HMLB\DDD\Message\Message;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
+use SimpleBus\Message\Name\NamedMessage;
 
 /**
  * Commits Object Manager transaction for persisted domain models.
@@ -41,11 +42,19 @@ class CommitsObjectManagerTransaction implements MessageBusMiddleware
         $next($message);
 
         $this->logger->debug(
-            'CommitsObjectManagerTransaction flushes Object manager after handling command'.$message::messageName()
+            sprintf(
+                'CommitsObjectManagerTransaction flushes Object manager after handling command "%s"',
+                $message instanceof NamedMessage ? $message::messageName() : get_class($message)
+            )
         );
 
         $this->om->flush();
 
-        $this->logger->debug('CommitsObjectManagerTransaction finished handling '.$message::messageName());
+        $this->logger->debug(
+            sprintf(
+                'CommitsObjectManagerTransaction finished handling "%s"',
+                $message instanceof NamedMessage ? $message::messageName() : get_class($message)
+            )
+        );
     }
 }
