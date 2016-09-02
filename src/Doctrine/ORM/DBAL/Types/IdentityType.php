@@ -4,9 +4,9 @@ declare (strict_types = 1);
 
 namespace HMLB\DDDBundle\Doctrine\ORM\DBAL\Types;
 
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use HMLB\DDD\Entity\Identity;
 
 /**
@@ -43,6 +43,11 @@ class IdentityType extends Type
         }
 
         throw ConversionException::conversionFailed($value, self::NAME);
+    }
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    {
+        return true;
     }
 
     public function getName()
